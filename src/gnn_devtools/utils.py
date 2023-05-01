@@ -8,7 +8,6 @@ def _triu_indices_3D(num_nodes:int, num_relations:int,
                                      np.ndarray,
                                      np.ndarray]:
     """ Upper triangle indices of 3D array
-
     
     :param num_nodes: total number of nodes in the graph
     :param num_relations: total number of unique relations in the graph
@@ -32,7 +31,6 @@ def _tril_indices_3D(num_nodes:int, num_relations:int,
                                      np.ndarray,
                                      np.ndarray]:
     """ Lower triangle indices of 3D array
-
     
     :param num_nodes: total number of nodes in the graph
     :param num_relations: total number of unique relations in the graph
@@ -55,7 +53,6 @@ def _diag_indices_3D(num_nodes:int, num_relations:int) -> tuple[np.ndarray,
                                                                 np.ndarray,
                                                                 np.ndarray]:
     """ Diagonal indices of 3D array
-
     
     :param num_nodes: total number of nodes in the graph
     :param num_relations: total number of unique relations in the graph

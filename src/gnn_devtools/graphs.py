@@ -10,6 +10,7 @@ from gnn_devtools.matrices import (mkAdjacencyMatrix, mkDegreeMatrix,
                                    mkIncidenceMatrix, _mkInOutDegreeMatrix,
                                    mkLabels, mkNodeEmbeddings, mkSymmetric,
                                    mkFeatureEmbeddings)
+from gnn_devtools.utils import _triu_indices_3D, _diag_indices_3D
 
 
 class Graph():
@@ -52,6 +53,13 @@ class Graph():
                                    reflexive = self.reflexive,
                                    p_relation = self.p_relation,
                                    rng = self._rng)
+
+    def adjacency(self) -> np.ndarray:
+        """ Return the adjacency matrix
+        
+        :returns: a Numpy array
+        """
+        return self.A
 
     def degree(self, mode:Literal["in", "out"]|None = None,
                collapsed:bool = True) -> np.ndarray:
@@ -116,7 +124,20 @@ class Graph():
     def __len__(self):
         """ Return graph length measured in number of edges
         """
-        return self.A.sum()
+        if not self.undirected:
+            return self.A.sum()
+        else:
+            l = 0
+            if self.A.ndim == 3:
+                l += self.A[_triu_indices_3D(self.num_nodes,
+                                             self.num_relations, k=1)].sum()
+                l += self.A[_diag_indices_3D(self.num_nodes,
+                                             self.num_relations)].sum()
+            else:
+                l += self.A[np.triu_indices(self.num_nodes, k=1)].sum()
+                l += self.A[np.diag_indices(self.num_nodes)].sum()
+
+            return l
 
 class UndirectedGraph(Graph):
     """ An undirected graph
@@ -325,3 +346,18 @@ class KnowledgeGraph(LabeledDirectedGraph):
                 mkFeatureEmbeddings(num_nodes = num_nodes,
                                     features = self.attributes,
                                     rng = self._rng)
+    
+    def node_embeddings(self) -> np.ndarray:
+        """ Return the node embeddings matrix
+        
+        :returns: a Numpy array
+        """
+        return self.E
+
+    
+    def freature_embeddings(self) -> np.ndarray:
+        """ Return the node feature embeddings matrix
+        
+        :returns: a Numpy array
+        """
+        return self.F
