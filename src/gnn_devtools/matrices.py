@@ -200,7 +200,7 @@ def mkDegreeMatrix(A:np.ndarray, undirected:bool,
     :param A: a 2D or 3D adjacency matrix
     :param undirected: whether the graph is directed or not
     :param collapsed: collapse the degree matrices from different
-        relations if |R| > 1
+        relations
     :returns: RxNxN or NxN Numpy array
     """
     

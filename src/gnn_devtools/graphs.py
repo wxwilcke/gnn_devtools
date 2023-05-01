@@ -60,8 +60,8 @@ class Graph():
         :param mode: return the in-degree, out-degree, or the merged 
             in- and outdegree matrix
         :param collapsed: collapse the degree matrices from different
-            relations if |R| > 1
-        :returns: a N x N or R x N x N Numpy array
+            relations
+        :returns: a Numpy array
         """
         if mode is None:
             return mkDegreeMatrix(self.A, undirected = self.undirected,
@@ -77,7 +77,7 @@ class Graph():
         """ Return the incidence matrix
         
         :param relation: index of relation slice in 3D matrix or None for all
-        :returns: a N x |E_r| or N x |E Numpy array
+        :returns: a Numpy array
         """
         return mkIncidenceMatrix(self.A, undirected = self.undirected,
                                  relation = relation)
@@ -92,9 +92,9 @@ class Graph():
         :param symmetric: force a symmetric Laplacian if the graph is
             directed
         :param collapsed: collapse the matrices from different
-            relations if |R| > 1
+            relations
         :param normalized: return the normalized Laplacian
-        :returns: a N x |E_r| or N x |E Numpy array
+        :returns: a Numpy array
         """
         if symmetric and not self.undirected:
             A = mkSymmetric(self.A)
