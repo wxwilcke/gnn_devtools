@@ -30,7 +30,7 @@ export SOURCE_DATE_EPOCH=$(date +"%s")
 ###############
 # INSTALL LIB #
 ###############
-python -m pip install .
+/usr/bin/python -m pip install .
  
 ##############
 # BUILD DOCS #
