@@ -17,7 +17,7 @@
 ###################
  
 apt-get update
-apt-get -y install git rsync python3-pip python3-sphinx python3-sphinx-rtd-theme
+apt-get -y install git rsync python3-sphinx python3-sphinx-rtd-theme
  
 #####################
 # DECLARE VARIABLES #
@@ -27,19 +27,16 @@ pwd
 ls -lah
 export SOURCE_DATE_EPOCH=$(date +"%s")
 
-###############
-# INSTALL LIB #
-###############
-/usr/bin/python3 -m pip install .
- 
 ##############
 # BUILD DOCS #
 ##############
  
 # build our documentation with sphinx (see docs/conf.py)
 # * https://www.sphinx-doc.org/en/master/usage/quickstart.html#running-the-build
-make -C docs clean
-make -C docs html
+cd docs/
+make clean
+make html
+cd -
  
 #######################
 # Update GitHub Pages #
