@@ -33,10 +33,8 @@ export SOURCE_DATE_EPOCH=$(date +"%s")
  
 # build our documentation with sphinx (see docs/conf.py)
 # * https://www.sphinx-doc.org/en/master/usage/quickstart.html#running-the-build
-cd docs/
-make clean
-make html
-cd -
+make -C docs clean
+make -C docs html
  
 #######################
 # Update GitHub Pages #
