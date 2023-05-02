@@ -17,20 +17,11 @@
 ###################
 
 
+echo "deb http://http.us.debian.org/debian/ testing non-free contrib main" >> /etc/apt/sources.list
 apt-get update
-
-apt-get -y install wget build-essential libncursesw5-dev libssl-dev \
-     libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev  
+apt-get -y upgrade python3
 apt-get -y install git rsync python3-sphinx python3-sphinx-rtd-theme
 
-wget https://www.python.org/ftp/python/3.10.8/Python-3.10.8.tgz
-tar xzf Python-3.10.8.tgz
-cd Python-3.10.8
-./configure --enable-optimizations
-make install
-cd -
-
-ln -s /usr/local/bin/python3.10 /usr/bin/python
 
 
 #####################
