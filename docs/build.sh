@@ -19,7 +19,7 @@
 
 apt-get update
 
-apt-get -y wget build-essential libncursesw5-dev libssl-dev \
+apt-get -y install wget build-essential libncursesw5-dev libssl-dev \
      libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev  
 apt-get -y install git rsync python3-sphinx python3-sphinx-rtd-theme
 
