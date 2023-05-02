@@ -16,12 +16,19 @@
 # INSTALL DEPENDS #
 ###################
 
-add-apt-repository ppa:deadsnakes/ppa
+
 apt-get update
-apt-get -y install git rsync python3.10 python3-sphinx python3-sphinx-rtd-theme
- 
-rm /usr/bin/python
-ln -s /usr/bin/python3.10 /usr/bin/python
+
+apt-get -y wget build-essential libncursesw5-dev libssl-dev \
+     libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev  
+apt-get -y install git rsync python3-sphinx python3-sphinx-rtd-theme
+
+wget https://www.python.org/ftp/python/3.10.8/Python-3.10.8.tgz
+tar xzf Python-3.10.8.tgz
+cd Python-3.10.8
+./configure --enable-optimizations
+make altinstall
+
 
 #####################
 # DECLARE VARIABLES #
