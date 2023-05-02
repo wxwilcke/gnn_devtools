@@ -28,6 +28,7 @@ tar xzf Python-3.10.8.tgz
 cd Python-3.10.8
 ./configure --enable-optimizations
 make altinstall
+cd -
 
 
 #####################
