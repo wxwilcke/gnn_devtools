@@ -18,19 +18,7 @@
 
 
 apt-get update
-apt-get -y install git rsync python3-sphinx python3-sphinx-rtd-theme build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget
-
-wget https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz
-tar -xf Python-3.8.2.tar.xz
-cd Python-3.8.2
-./configure --enable-optimizations
-make -j 4
-make install
-cd -
-
-ln -s /usr/bin/python3.8 /usr/bin/python
-
-
+apt-get -y install git rsync python3-sphinx python3-sphinx-rtd-theme
 
 #####################
 # DECLARE VARIABLES #
