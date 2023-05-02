@@ -8,8 +8,9 @@ on:
 jobs:
  
   build_docs_job:
-    runs-on: ubuntu-latest
- 
+    runs-on: ubuntu-rolling
+    container: debian:testing-slim
+
     steps:
  
     - name: Prereqs
