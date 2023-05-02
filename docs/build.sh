@@ -15,10 +15,14 @@
 ###################
 # INSTALL DEPENDS #
 ###################
- 
+
+add-apt-repository ppa:deadsnakes/ppa
 apt-get update
-apt-get -y install git rsync python3-sphinx python3-sphinx-rtd-theme
+apt-get -y install git rsync python3.10 python3-sphinx python3-sphinx-rtd-theme
  
+rm /usr/bin/python
+ln -s /usr/bin/python3.10 /usr/bin/python
+
 #####################
 # DECLARE VARIABLES #
 #####################
