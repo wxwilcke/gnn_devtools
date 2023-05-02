@@ -30,6 +30,8 @@ cd Python-3.10.8
 make install
 cd -
 
+ln -s /usr/local/bin/python3.10 /usr/bin/python
+
 
 #####################
 # DECLARE VARIABLES #
