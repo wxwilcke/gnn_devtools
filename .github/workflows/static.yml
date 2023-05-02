@@ -8,7 +8,7 @@ on:
 jobs:
  
   build_docs_job:
-    runs-on: ubuntu-rolling
+    runs-on: ubuntu-latest
     container: debian:testing-slim
 
     steps:
