@@ -1,10 +1,12 @@
 #! /usr/bin/env python
 
+from typing import Tuple
+
 import numpy as np
 
 
 def _triu_indices_3D(num_nodes:int, num_relations:int,
-                     k:int) -> tuple[np.ndarray,
+                     k:int) -> Tuple[np.ndarray,
                                      np.ndarray,
                                      np.ndarray]:
     """ Upper triangle indices of 3D array
@@ -27,7 +29,7 @@ def _triu_indices_3D(num_nodes:int, num_relations:int,
     return (z, x, y)
 
 def _tril_indices_3D(num_nodes:int, num_relations:int,
-                     k:int) -> tuple[np.ndarray,
+                     k:int) -> Tuple[np.ndarray,
                                      np.ndarray,
                                      np.ndarray]:
     """ Lower triangle indices of 3D array
@@ -49,7 +51,7 @@ def _tril_indices_3D(num_nodes:int, num_relations:int,
 
     return (z, x, y)
 
-def _diag_indices_3D(num_nodes:int, num_relations:int) -> tuple[np.ndarray,
+def _diag_indices_3D(num_nodes:int, num_relations:int) -> Tuple[np.ndarray,
                                                                 np.ndarray,
                                                                 np.ndarray]:
     """ Diagonal indices of 3D array
