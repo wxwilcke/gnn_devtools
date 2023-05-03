@@ -20,7 +20,7 @@
 apt-get update
 apt-get -y install git rsync python3-pip python3-sphinx python3-sphinx-rtd-theme
 
-pip3 install --no-input typing_extensions
+pip3 install --no-input typing_extensions numpy
 
 #####################
 # DECLARE VARIABLES #
