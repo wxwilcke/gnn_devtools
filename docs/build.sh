@@ -18,7 +18,9 @@
 
 
 apt-get update
-apt-get -y install git rsync python3-sphinx python3-sphinx-rtd-theme
+apt-get -y install git rsync python3-pip python3-sphinx python3-sphinx-rtd-theme
+
+python -m pip install --no-input typing_extensions
 
 #####################
 # DECLARE VARIABLES #
