@@ -9,7 +9,7 @@ jobs:
  
   build_docs_job:
     runs-on: ubuntu-latest
-    container: debian:stable-slim
+    container: debian:buster-slim
 
     steps:
  
