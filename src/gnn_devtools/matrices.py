@@ -2,6 +2,7 @@
 
 
 from random import Random
+from typing import Optional, Union
 try:
     from typing import Literal
 except ImportError:
@@ -14,7 +15,7 @@ from gnn_devtools.utils import _diag_indices_3D, _triu_indices_3D
 
 
 def mkAdjacencyMatrix(num_nodes:int, num_relations:int, undirected:bool,
-                      reflexive:bool, p_relation:list|np.ndarray,
+                      reflexive:bool, p_relation:Union[list, np.ndarray],
                       rng:np.random.Generator) -> np.ndarray:
     """ Generate random adjacency matrix
 
@@ -166,7 +167,7 @@ def mkFeatureEmbedding(num_nodes:int, mode:Literal["natural", "real"],
                        embedding_dim:int, distribution:Literal["random",
                        "normal", "exponential", "poisson", "uniform"],
                        p:float, rng:np.random.Generator,
-                       **kwargs:dict|None) -> np.ndarray:
+                       **kwargs:Optional[dict]) -> np.ndarray:
     """ Generate random feature embedding matrix with one feature
 
     :param num_nodes: total number of nodes in the graph
@@ -267,7 +268,7 @@ def _mkInOutDegreeMatrix(A:np.ndarray, mode:Literal["in", "out"],
     return D
 
 def mkIncidenceMatrix(A:np.ndarray, undirected:bool,
-                      relation:int|None) -> np.ndarray:
+                      relation:Optional[int]) -> np.ndarray:
     """ Generate incidence matrix
 
     :param A: a 2D or 3D adjacency matrix

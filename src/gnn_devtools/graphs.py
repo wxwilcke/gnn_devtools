@@ -2,6 +2,7 @@
 
 
 import random
+from typing import Optional, Union 
 try:
     from typing import Literal
 except ImportError:
@@ -21,8 +22,9 @@ class Graph():
     """
 
     def __init__(self, num_nodes:int, num_relations:int,
-                 p_relation:float|list|np.ndarray, undirected:bool,
-                 reflexive:bool, seed:int|None = None) -> None:
+                 p_relation:Union[float, list, np.ndarray],
+                 undirected:bool, reflexive:bool,
+                 seed:Optional[int] = None) -> None:
         """
         :param num_nodes: total number of nodes in the graph
         :param num_relations: total number of unique relations in the graph
@@ -64,7 +66,7 @@ class Graph():
         """
         return self.A
 
-    def degree(self, mode:Literal["in", "out"]|None = None,
+    def degree(self, mode:Optional[Literal["in", "out"]] = None,
                collapsed:bool = True) -> np.ndarray:
         """ Return the degree matrix
 
@@ -84,7 +86,7 @@ class Graph():
         else:
             raise Exception("Expects mode to be 'in', 'out', or 'None'")
 
-    def incidence(self, relation:int|None = None) -> np.ndarray:
+    def incidence(self, relation:Optional[int] = None) -> np.ndarray:
         """ Return the incidence matrix
         
         :param relation: index of relation slice in 3D matrix or None for all
@@ -93,7 +95,7 @@ class Graph():
         return mkIncidenceMatrix(self.A, undirected = self.undirected,
                                  relation = relation)
 
-    def laplacian(self, mode:Literal["in", "out"]|None = None,
+    def laplacian(self, mode:Optional[Literal["in", "out"]] = None,
                   symmetric:bool = False, collapsed:bool = True,
                   normalized:bool = False) -> np.ndarray:
         """ Return the Laplacian matrix
@@ -147,7 +149,7 @@ class UndirectedGraph(Graph):
     """
 
     def __init__(self, num_nodes:int, p_relation:float = 0.2,
-                 reflexive:bool = True, seed:int|None = None) -> None:
+                 reflexive:bool = True, seed:Optional[int] = None) -> None:
         """
         :param num_nodes: total number of nodes in the graph
         :param reflexive: whether nodes can refer to themselves
@@ -168,7 +170,7 @@ class DirectedGraph(Graph):
     """
 
     def __init__(self, num_nodes:int, p_relation:float = 0.2,
-                 reflexive:bool = True, seed:int|None = None) -> None:
+                 reflexive:bool = True, seed:Optional[int] = None) -> None:
         """
         :param num_nodes: total number of nodes in the graph
         :param reflexive: whether nodes can refer to themselves
@@ -189,10 +191,10 @@ class LabeledGraph(Graph):
     """
 
     def __init__(self, num_nodes:int, num_relations:int = 2, 
-                 p_relation:float|list|np.ndarray = 0.2,
+                 p_relation:Union[float, list, np.ndarray] = 0.2,
                  undirected:bool = False, reflexive:bool = True,
                  edge_labels:bool = True, node_labels:bool = True,
-                 seed:int|None = None) -> None:
+                 seed:Optional[int] = None) -> None:
         """
         :param num_nodes: total number of nodes in the graph
         :param num_relations: total number of unique relations in the graph
@@ -234,9 +236,10 @@ class LabeledUndirectedGraph(LabeledGraph):
     """
 
     def __init__(self, num_nodes:int, num_relations:int = 2, 
-                 p_relation:float|list|np.ndarray = 0.2,
+                 p_relation:Union[float, list, np.ndarray] = 0.2,
                  reflexive:bool = True, edge_labels:bool = True,
-                 node_labels:bool = True, seed:int|None = None) -> None:
+                 node_labels:bool = True,
+                 seed:Optional[int] = None) -> None:
         """
         :param num_nodes: total number of nodes in the graph
         :param num_relations: total number of unique relations in the graph
@@ -260,9 +263,10 @@ class LabeledDirectedGraph(LabeledGraph):
     """
 
     def __init__(self, num_nodes:int, num_relations:int = 2, 
-                 p_relation:float|list|np.ndarray = 0.2,
+                 p_relation:Union[float, list, np.ndarray] = 0.2,
                  reflexive:bool = True, edge_labels:bool = True,
-                 node_labels:bool = True, seed:int|None = None) -> None:
+                 node_labels:bool = True,
+                 seed:Optional[int] = None) -> None:
         """
         :param num_nodes: total number of nodes in the graph
         :param num_relations: total number of unique relations in the graph
@@ -286,13 +290,13 @@ class KnowledgeGraph(LabeledDirectedGraph):
     """
 
     def __init__(self, num_nodes:int, num_relations:int = 2,
-                 p_relation:float|list|np.ndarray = 0.2,
+                 p_relation:Union[float, list, np.ndarray] = 0.2,
                  num_attributes:int = 2,
-                 p_attribute:float|list|np.ndarray = 0.6,
+                 p_attribute:Union[float, list, np.ndarray] = 0.6,
                  attribute_config:list[dict] = list(),
                  node_embedding_dim:int = 16,
                  node_embeddings:Literal["one-hot", "random"] = "one-hot",
-                 reflexive:bool = True, seed:int|None = None) -> None:
+                 reflexive:bool = True, seed:Optional[int] = None) -> None:
         """
         :param num_nodes: total number of nodes in the graph
         :param num_relations: total number of unique relations in the graph
