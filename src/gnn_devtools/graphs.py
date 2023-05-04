@@ -2,7 +2,7 @@
 
 
 import random
-from typing import Dict, List, Optional, Union 
+from typing import List, Optional, Union 
 try:
     from typing import Literal
 except ImportError:
@@ -22,7 +22,7 @@ class Graph():
     """
 
     def __init__(self, num_nodes:int, num_relations:int,
-                 p_relation:Union[float, List, np.ndarray],
+                 p_relation:Union[float, list, np.ndarray],
                  undirected:bool, reflexive:bool,
                  seed:Optional[int] = None) -> None:
         """
@@ -191,7 +191,7 @@ class LabeledGraph(Graph):
     """
 
     def __init__(self, num_nodes:int, num_relations:int = 2, 
-                 p_relation:Union[float, List, np.ndarray] = 0.2,
+                 p_relation:Union[float, list, np.ndarray] = 0.2,
                  undirected:bool = False, reflexive:bool = True,
                  edge_labels:bool = True, node_labels:bool = True,
                  seed:Optional[int] = None) -> None:
@@ -236,7 +236,7 @@ class LabeledUndirectedGraph(LabeledGraph):
     """
 
     def __init__(self, num_nodes:int, num_relations:int = 2, 
-                 p_relation:Union[float, List, np.ndarray] = 0.2,
+                 p_relation:Union[float, list, np.ndarray] = 0.2,
                  reflexive:bool = True, edge_labels:bool = True,
                  node_labels:bool = True,
                  seed:Optional[int] = None) -> None:
@@ -263,7 +263,7 @@ class LabeledDirectedGraph(LabeledGraph):
     """
 
     def __init__(self, num_nodes:int, num_relations:int = 2, 
-                 p_relation:Union[float, List, np.ndarray] = 0.2,
+                 p_relation:Union[float, list, np.ndarray] = 0.2,
                  reflexive:bool = True, edge_labels:bool = True,
                  node_labels:bool = True,
                  seed:Optional[int] = None) -> None:
@@ -292,8 +292,8 @@ class KnowledgeGraph(LabeledDirectedGraph):
     def __init__(self, num_nodes:int, num_relations:int = 2,
                  p_relation:Union[float, List, np.ndarray] = 0.2,
                  num_attributes:int = 2,
-                 p_attribute:Union[float, List, np.ndarray] = 0.6,
-                 attribute_config:list[Dict] = list(),
+                 p_attribute:Union[float, list, np.ndarray] = 0.6,
+                 attribute_config:List[dict] = list(),
                  node_embedding_dim:int = 16,
                  node_embeddings:Literal["one-hot", "random"] = "one-hot",
                  reflexive:bool = True, seed:Optional[int] = None) -> None:

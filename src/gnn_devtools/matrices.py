@@ -2,7 +2,7 @@
 
 
 from random import Random
-from typing import Dict, List, Optional, Tuple, Union
+from typing import List, Optional, Tuple, Union
 try:
     from typing import Literal
 except ImportError:
@@ -15,7 +15,7 @@ from gnn_devtools.utils import _diag_indices_3D, _triu_indices_3D
 
 
 def mkAdjacencyMatrix(num_nodes:int, num_relations:int, undirected:bool,
-                      reflexive:bool, p_relation:Union[List, np.ndarray],
+                      reflexive:bool, p_relation:Union[list, np.ndarray],
                       rng:np.random.Generator) -> np.ndarray:
     """ Generate random adjacency matrix
 
@@ -127,7 +127,7 @@ def mkNodeEmbeddings(num_nodes:int, mode:Literal["one-hot", "random"],
 
     return E
 
-def mkFeatureEmbeddings(num_nodes:int, features:list[Dict],
+def mkFeatureEmbeddings(num_nodes:int, features:List[dict],
                         rng:np.random.Generator) -> Tuple[np.ndarray,
                                                           np.ndarray]:
     """ Generate random feature embedding matrix with one or more features
@@ -167,7 +167,7 @@ def mkFeatureEmbedding(num_nodes:int, mode:Literal["natural", "real"],
                        embedding_dim:int, distribution:Literal["random",
                        "normal", "exponential", "poisson", "uniform"],
                        p:float, rng:np.random.Generator,
-                       **kwargs:Optional[Dict]) -> np.ndarray:
+                       **kwargs:Optional[dict]) -> np.ndarray:
     """ Generate random feature embedding matrix with one feature
 
     :param num_nodes: total number of nodes in the graph
