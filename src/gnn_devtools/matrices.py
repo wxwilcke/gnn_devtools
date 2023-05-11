@@ -43,6 +43,13 @@ def mkAdjacencyMatrix(num_nodes:int, num_relations:int, undirected:bool,
                      size = (num_nodes, num_nodes)).astype(np.int8)
     else:
         raise Exception("Expects 0 < num_relations < 256")
+    
+    if A.ndim == 3:
+        A[_diag_indices_3D(num_nodes, num_relations)] = 1 if reflexive else 0
+    elif A.ndim == 2:
+        A[np.diag_indices(num_nodes)] = 1 if reflexive else 0
+    else:
+        raise Exception("Expects 2D or 3D array")
 
     # ensure no disconnected nodes
     A = _mkConnected(A, undirected = undirected, rng = rng)
@@ -58,13 +65,6 @@ def mkAdjacencyMatrix(num_nodes:int, num_relations:int, undirected:bool,
             A.T[np.triu_indices(num_nodes, k = 1)]
         else:
             raise Exception("Expects 2D or 3D array")
-    
-    if A.ndim == 3:
-        A[_diag_indices_3D(num_nodes, num_relations)] = 1 if reflexive else 0
-    elif A.ndim == 2:
-        A[np.diag_indices(num_nodes)] = 1 if reflexive else 0
-    else:
-        raise Exception("Expects 2D or 3D array")
 
     return A
 
@@ -84,8 +84,30 @@ def _mkConnected(A:np.ndarray, undirected:bool,
         r_sum = A.sum(axis = A.ndim - 1) + A.sum(axis = A.ndim - 2)
 
     r_idx = np.where(r_sum == 0)
+    if len(r_idx[1]) <= 0:
+        # no disconnected nodes
+        return A
+
+    if A.ndim > 1:
+        # nodes only need to be connected with at most one relation
+        r_idx_adj = (list(), list())
+        connected = set()
+
+        n_iter = np.arange(len(r_idx[1]))
+        rng.shuffle(n_iter)  # randomize connected relation
+        for i in n_iter:
+            r, v = r_idx[0][i], r_idx[1][i]
+            if v in connected:
+                continue
+
+            r_idx_adj[0].append(r)
+            r_idx_adj[1].append(v)
+            connected.add(v)
+
+        r_idx = r_idx_adj
+
     node_idx = [rng.integers(low = 0, high = num_nodes)
-                for _ in range(r_idx[0].shape[0])]
+                for _ in range(len(r_idx[1]))]
     A[(*r_idx, node_idx)] = 1
 
     return A
