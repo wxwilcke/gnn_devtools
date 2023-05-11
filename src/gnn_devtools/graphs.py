@@ -362,7 +362,7 @@ class KnowledgeGraph(LabeledDirectedGraph):
         return self.E
 
     
-    def freature_embeddings(self) -> np.ndarray:
+    def feature_embeddings(self) -> np.ndarray:
         """ Return the node feature embeddings matrix
         
         :returns: a Numpy array
