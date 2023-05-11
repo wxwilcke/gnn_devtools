@@ -24,6 +24,8 @@ extensions = ['sphinx.ext.autodoc',
 templates_path = ['_templates']
 exclude_patterns = []
 
+# add __init__ docstring to class
+autoclass_content = 'both'
 
 
 # -- Options for HTML output -------------------------------------------------
