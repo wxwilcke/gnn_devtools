@@ -84,7 +84,7 @@ def _mkConnected(A:np.ndarray, undirected:bool,
         r_sum = A.sum(axis = A.ndim - 1) + A.sum(axis = A.ndim - 2)
 
     r_idx = np.where(r_sum == 0)
-    if len(r_idx[1]) <= 0:
+    if len(r_idx[-1]) <= 0:
         # no disconnected nodes
         return A
 
@@ -93,10 +93,15 @@ def _mkConnected(A:np.ndarray, undirected:bool,
         r_idx_adj = (list(), list())
         connected = set()
 
-        n_iter = np.arange(len(r_idx[1]))
+        n_iter = np.arange(len(r_idx[-1]))
         rng.shuffle(n_iter)  # randomize connected relation
         for i in n_iter:
-            r, v = r_idx[0][i], r_idx[1][i]
+            if A.ndim == 2:
+                r = 0  # only one relation
+            else:
+                r = r_idx[0][i]
+
+            v = r_idx[-1][i]
             if v in connected:
                 continue
 
@@ -107,7 +112,7 @@ def _mkConnected(A:np.ndarray, undirected:bool,
         r_idx = r_idx_adj
 
     node_idx = [rng.integers(low = 0, high = num_nodes)
-                for _ in range(len(r_idx[1]))]
+                for _ in range(len(r_idx[-1]))]
     A[(*r_idx, node_idx)] = 1
 
     return A
