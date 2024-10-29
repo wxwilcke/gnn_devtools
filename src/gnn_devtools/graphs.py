@@ -59,6 +59,11 @@ class Graph():
                                    p_relation = self.p_relation,
                                    rng = self._rng)
 
+    def edges(self) -> np.ndarray:
+        """ Return all edges in the graph using infix notation
+        """
+        return np.hstack([np.where(self.A != 0)]).T[:, [1, 0, 2]]
+
     def adjacency(self) -> np.ndarray:
         """ Return the adjacency matrix
         
